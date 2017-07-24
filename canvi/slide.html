@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title></title>
+
+		<!-- jQuery/jQueryUI (hosted) -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/jquery-ui.js"></script>
+		
+		<!-- Plugin -->
+		<script src="jquery.coverflow.js"></script>
+		<!-- Optionals -->
+		<script src="jquery.interpolate.min.js"></script>
+		<script src="jquery.touchSwipe.min.js"></script>
+		<script src="reflection.js"></script>
+		<style>
+				
+				#preview-coverflow .cover {
+					cursor:		pointer;
+					width:		236px;
+					height:		452px;
+					box-shadow:	0 0 4em 1em white;
+				}
+			</style>
+			<script>
+				$(function() {
+					
+
+					$('#preview-coverflow').coverflow({
+						index:			4,
+						density:		2,
+						innerOffset:	50,
+						innerScale:		.7,
+						animateStep:	function(event, cover, offset, isVisible, isMiddle, sin, cos) {
+							if (isVisible) {
+								if (isMiddle) {
+									$(cover).css({
+										'filter':			'none',
+										'-webkit-filter':	'none'
+									});
+								} else {
+									var brightness	= 1 + Math.abs(sin),
+										contrast	= 1 - Math.abs(sin),
+										filter		= 'contrast('+contrast+') brightness('+brightness+')';
+									$(cover).css({
+										'filter':			filter,
+										'-webkit-filter':	filter
+									});
+								}
+							}
+						}
+					});
+				});
+			</script>
+    </head>
+    <body>
+		
+		<div id="preview">
+			<div id="preview-coverflow">
+				<img class="cover" src="images/downloads/slide1.png"/>
+				<img class="cover" src="images/downloads/slide2.png"/>
+				<img class="cover" src="images/downloads/slide3.png"/>
+				<img class="cover" src="images/downloads/slide4.png"/>
+				<img class="cover" src="images/downloads/slide5.png"/>
+
+				<img class="cover" src="images/downloads/slide6.png"/>
+			</div>
+			
+		</div>
+
+		
+			
+	</body>
+</html>
